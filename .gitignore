@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+/example/amocrm.phar
+/src/vendor/
+/example/data/
+/example/logs/
+/example/config.php
+/index.php
+/example/AmoPRO.phar

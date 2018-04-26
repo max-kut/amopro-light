@@ -1,0 +1,22 @@
+{
+    "name": "maxkut/amopro-light",
+    "description": "amopro - простая интеграция вашего сайта и amocrm",
+    "license": "MIT",
+    "keywords": ["amocrm", "crm", "api"],
+    "authors": [
+        {
+            "name": "max-kut",
+            "email": "max@amopro.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "dotzero/amocrm": "0.3.*",
+        "monolog/monolog": "1.23.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AmoPRO\\": "src/app"
+        }
+    }
+}
