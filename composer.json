@@ -18,5 +18,8 @@
         "psr-4": {
             "AmoPRO\\": "src/app"
         }
+    },
+    "config": {
+        "vendor-dir": "src/vendor"
     }
 }

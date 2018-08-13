@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "48ab5964845128ba108910dd231deaa2",
+    "content-hash": "f2ef41de5a079260c1dba25e1371b230",
     "packages": [
         {
             "name": "dotzero/amocrm",
-            "version": "v0.3.27",
+            "version": "v0.3.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dotzero/amocrm-php.git",
-                "reference": "13dd9853fb158a7927e54494c7d568e8664af9d7"
+                "reference": "d9f818acaf010fffdfe095f15c5e0ee4587a9385"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dotzero/amocrm-php/zipball/13dd9853fb158a7927e54494c7d568e8664af9d7",
-                "reference": "13dd9853fb158a7927e54494c7d568e8664af9d7",
+                "url": "https://api.github.com/repos/dotzero/amocrm-php/zipball/d9f818acaf010fffdfe095f15c5e0ee4587a9385",
+                "reference": "d9f818acaf010fffdfe095f15c5e0ee4587a9385",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 "api",
                 "crm"
             ],
-            "time": "2018-02-01T18:51:38+00:00"
+            "time": "2018-04-15T06:32:36+00:00"
         },
         {
             "name": "monolog/monolog",
