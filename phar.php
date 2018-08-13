@@ -7,8 +7,10 @@
  */
 ini_set('phar.readonly', 0);
 
-$phar = new \Phar('AmoPRO.phar',
+$phar = new \Phar('example/AmoPRO.phar',
     \FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME,
     'amopro.phar');
 $phar->setDefaultStub('autoloader.php');
-$phar->buildFromDirectory(__DIR__ . DIRECTORY_SEPARATOR.'src');
+$phar->buildFromDirectory(__DIR__ . DIRECTORY_SEPARATOR . 'src');
+
+copy(__DIR__ . '/src/amopro.js', __DIR__ . '/example/amopro.js');
