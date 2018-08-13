@@ -10,11 +10,9 @@ namespace AmoPRO\Core;
 
 use AmoCRM\Client;
 use AmoPRO\Config;
-use AmoPRO\Exceptions\LibaryException;
+use AmoPRO\Exceptions\LibraryException;
 use AmoPRO\Logger;
 use AmoPRO\Order;
-
-//require_once '_helpers.php';
 
 abstract class App
 {
@@ -39,22 +37,26 @@ abstract class App
     /** @var array промежуточные данные */
     protected $data = [];
     
+    private $_exec_file;
+    
     /**
      * App constructor.
      *
      * @param $config
      *
-     * @throws \AmoPRO\Exceptions\LibaryException
+     * @throws \AmoPRO\Exceptions\LibraryException
      */
     public function __construct($config)
     {
         $this->config = new Config($config);
         
+        $this->_exec_file = $this->config->conf_path . DIRECTORY_SEPARATOR . '_execute';
+        
         $logsPath    = !empty($this->config->logs_path) ? $this->config->logs_path : 'logs';
         $this->log   = new Logger($logsPath, $this->config->log_level);
         
         if (!class_exists(Client::class)) {
-            throw new LibaryException('Не подключена библиотека dotzero/amocrm', $this->log);
+            throw new LibraryException('Не подключена библиотека dotzero/amocrm', $this->log);
         }
         
         $this->amo = new Client(
@@ -83,5 +85,39 @@ abstract class App
             return $matches[0];
         };
         return ($filterPhone($phone1) == $filterPhone($phone2));
+    }
+    
+    protected function execStart()
+    {
+        while (true) {
+            if($this->isExecStart()){
+                sleep(1);
+                continue;
+            }
+            file_put_contents($this->_exec_file, "1");
+            break;
+        }
+    }
+    
+    /**
+     * @return bool
+     */
+    protected function isExecStart(){
+        if(!file_exists($this->_exec_file)){
+            return false;
+        }
+        // запрос не может выполняться более минуты
+        elseif(file_exists($this->_exec_file) && (filemtime($this->_exec_file) < (time() - (60) ))){
+            return false;
+        }
+        
+        return (bool)file_get_contents($this->_exec_file);
+    }
+    
+    protected function execStop()
+    {
+        $tempFile = $this->_exec_file . '_template';
+        file_put_contents($tempFile, "");
+        rename($tempFile, $this->_exec_file);
     }
 }

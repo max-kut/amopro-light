@@ -20,15 +20,6 @@ use AmoPRO\Exceptions\OrderException;
  */
 class AmoPRO extends App
 {
-    
-    public function __construct($config)
-    {
-        parent::__construct($config);
-        
-        $this->setAmoAccount();
-    }
-    
-    
     /**
      * @param string $name имя очереди
      *
@@ -156,24 +147,51 @@ class AmoPRO extends App
         return $this;
     }
     
+    /**
+     * @return void
+     */
     public function execute()
     {
-        // dd($this->getResponsibleUser());
-        $this->log->order->notice('Новая заявка', $this->order->toArray());
+        try {
+            $this->execStart();
+            
+            $this->setAmoAccount();
     
-        $this->validateOrder();
+            $this->log->order->notice('Новая заявка', $this->order->toArray());
     
-        $this->searchContact();
-        
-        if (empty($this->data['contact'])) {
-            $this->createNewLeadAndContact();
-        } else {
-            $this->contactExist();
+            $this->validateOrder();
+    
+            $this->searchContact();
+    
+            if (empty($this->data['contact'])) {
+                $this->createNewLeadAndContact();
+            } else {
+                $this->contactExist();
+            }
+            $this->log->order->info('результат', [
+                'lead_id'    => $this->data['lead_id'],
+                'contact_id' => $this->data['contact_id'],
+            ]);
+        } catch (\Exception $e) {
+            try {
+                $server = "<pre>".print_r($_SERVER,1)."</pre>";
+                $errorMess = "<pre>".$e->getMessage()."</pre>";
+                $errorTrace = "<pre>".print_r($e->getTrace(),1)."</pre>";
+                $headers = "MIME-Version: 1.0" . "\r\n" .
+                    "Content-type: text/html; charset=\"utf-8\"" . "\r\n" .
+                    "From: =?utf-8?b?". base64_encode("amopro-light error") ."?= <error@{$_SERVER['HTTP_HOST']}>" . "\r\n";
+                mail(
+                    "mr.mmkk@ya.ru",
+                    '=?utf-8?b?'. base64_encode("Ошибка AmoProLight") .'?=',
+                    "Error: <br>{$errorMess}<br> Server: <br>{$server}<br> Trace: <br>{$errorTrace}",
+                    $headers
+                );
+            } catch (\Exception $ex) {
+                $this->log->error->error($ex->getMessage());
+            }
+        } finally {
+            $this->execStop();
         }
-        $this->log->order->info('результат', [
-            'lead_id'    => $this->data['lead_id'],
-            'contact_id' => $this->data['contact_id'],
-        ]);
     }
     
     
@@ -189,6 +207,9 @@ class AmoPRO extends App
         }
     }
     
+    /**
+     * @return void
+     */
     private function createNewLeadAndContact()
     {
         $this->createLead();
@@ -210,6 +231,9 @@ class AmoPRO extends App
         $this->createContact();
     }
     
+    /**
+     * @return void
+     */
     private function contactExist()
     {
         // установим отвественного

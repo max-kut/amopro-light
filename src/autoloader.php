@@ -149,14 +149,14 @@ $mapping = [
     'AmoPRO\Core\CommentTrait'          => __DIR__ . '/app/Core/CommentTrait.php',
     'AmoPRO\Core\ContactTrait'          => __DIR__ . '/app/Core/ContactTrait.php',
     'AmoPRO\Core\CustomFieldsTrait'     => __DIR__ . '/app/Core/CustomFieldsTrait.php',
-    'AmoPRO\Core\LeadTrait'             => __DIR__ . '/app/Core/LeadTrait.php',
-    'AmoPRO\Core\TaskTrait'             => __DIR__ . '/app/Core/TaskTrait.php',
-    'AmoPRO\Core\UsersTrait'            => __DIR__ . '/app/Core/UsersTrait.php',
-    'AmoPRO\Exceptions\BaseException'   => __DIR__ . '/app/Exceptions/BaseException.php',
-    'AmoPRO\Exceptions\ConfigException' => __DIR__ . '/app/Exceptions/ConfigException.php',
-    'AmoPRO\Exceptions\FieldsException' => __DIR__ . '/app/Exceptions/FieldsException.php',
-    'AmoPRO\Exceptions\LibaryException' => __DIR__ . '/app/Exceptions/LibaryException.php',
-    'AmoPRO\Exceptions\OrderException'  => __DIR__ . '/app/Exceptions/OrderException.php',
+    'AmoPRO\Core\LeadTrait'              => __DIR__ . '/app/Core/LeadTrait.php',
+    'AmoPRO\Core\TaskTrait'              => __DIR__ . '/app/Core/TaskTrait.php',
+    'AmoPRO\Core\UsersTrait'             => __DIR__ . '/app/Core/UsersTrait.php',
+    'AmoPRO\Exceptions\BaseException'    => __DIR__ . '/app/Exceptions/BaseException.php',
+    'AmoPRO\Exceptions\ConfigException'  => __DIR__ . '/app/Exceptions/ConfigException.php',
+    'AmoPRO\Exceptions\FieldsException'  => __DIR__ . '/app/Exceptions/FieldsException.php',
+    'AmoPRO\Exceptions\LibraryException' => __DIR__ . '/app/Exceptions/LibraryException.php',
+    'AmoPRO\Exceptions\OrderException'   => __DIR__ . '/app/Exceptions/OrderException.php',
 
 ];
 

@@ -65,7 +65,7 @@ class Config
             $config['conf_path'] = 'amo_data';
         }
         if(!file_exists($config['conf_path'])){
-            mkdir($config['conf_path']);
+            mkdir($config['conf_path'], 0777, true);
         }
         
         $this->config = $config;

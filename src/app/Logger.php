@@ -9,7 +9,7 @@
 namespace AmoPRO;
 
 
-use AmoPRO\Exceptions\LibaryException;
+use AmoPRO\Exceptions\LibraryException;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger as MonologLogger;
 
@@ -20,6 +20,7 @@ use Monolog\Logger as MonologLogger;
  *
  * @property MonologLogger $order
  * @property MonologLogger $debug
+ * @property MonologLogger $error
  */
 class Logger
 {
@@ -35,20 +36,20 @@ class Logger
      *
      * @param string $logsPath
      *
-     * @throws \AmoPRO\Exceptions\LibaryException
+     * @throws \AmoPRO\Exceptions\LibraryException
      */
     public function __construct($logsPath,$logLevel)
     {
         if (!class_exists(MonologLogger::class)) {
-            throw new LibaryException('Не подключена библиотека monolog/monolog');
+            throw new LibraryException('Не подключена библиотека monolog/monolog');
         }
         if (!file_exists($logsPath)) {
-            mkdir($logsPath);
+            @mkdir($logsPath, 0777, true);
         }
         // помесячные папки с логами
         $this->logsPath = $logsPath . DIRECTORY_SEPARATOR . date('Y-m');
         if (!file_exists($this->logsPath)) {
-            mkdir($this->logsPath);
+            @mkdir($this->logsPath, 0777, true);
         }
         
         switch ($logLevel){
@@ -83,7 +84,9 @@ class Logger
             $this->channels[$name]->pushHandler(
                 new StreamHandler(
                     $this->logsPath . DIRECTORY_SEPARATOR.$name.'_'.date('Y-m-d').'.log',
-                    $this->logLevel
+                    $this->logLevel,
+                    true,
+                    0777
                 )
             );
         }

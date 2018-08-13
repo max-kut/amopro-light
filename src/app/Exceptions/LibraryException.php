@@ -9,7 +9,7 @@
 namespace AmoPRO\Exceptions;
 
 
-class LibaryException extends BaseException
+class LibraryException extends BaseException
 {
     
 }
