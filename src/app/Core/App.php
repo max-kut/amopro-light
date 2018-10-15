@@ -38,13 +38,14 @@ abstract class App
     protected $data = [];
     
     private $_exec_file;
-    
+
     /**
      * App constructor.
      *
      * @param $config
      *
      * @throws \AmoPRO\Exceptions\LibraryException
+     * @throws \AmoPRO\Exceptions\ConfigException
      */
     public function __construct($config)
     {
@@ -86,7 +87,29 @@ abstract class App
         };
         return ($filterPhone($phone1) == $filterPhone($phone2));
     }
-    
+
+    /**
+     * @return \AmoCRM\Client
+     */
+    public function getAmoClient()
+    {
+        return $this->amo;
+    }
+
+    /**
+     * @param $name
+     * @param $mess
+     * @param array $data
+     */
+    public function log($name, $mess, $data = [])
+    {
+        $this->log->{$name}->debug($mess, $data);
+    }
+
+
+    /**
+     * флаг что заявка отправляется
+     */
     protected function execStart()
     {
         while (true) {

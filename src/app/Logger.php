@@ -76,7 +76,12 @@ class Logger
                 break;
         }
     }
-    
+
+    /**
+     * @param $name
+     * @return mixed
+     * @throws \Exception
+     */
     public function __get($name)
     {
         if(!isset($this->channels[$name])){

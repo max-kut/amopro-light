@@ -110,7 +110,7 @@ trait UsersTrait
         
         // Следующий на очереди
         $next_resp = $last_resp + 1;
-        
+
         // запишем следующего по очереди в файл
         file_put_contents($file, $next_resp);
         

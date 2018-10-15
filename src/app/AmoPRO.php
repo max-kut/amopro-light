@@ -24,6 +24,7 @@ class AmoPRO extends App
      * @param string $name имя очереди
      *
      * @return $this
+     * @throws \AmoPRO\Exceptions\ConfigException
      */
     public function onQueue($name)
     {
